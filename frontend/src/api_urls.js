@@ -1,0 +1,1 @@
+export const download_url = `http://localhost:8080/download`
