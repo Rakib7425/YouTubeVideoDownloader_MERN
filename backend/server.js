@@ -47,6 +47,11 @@ setInterval(() => {
 // Define the port number for the server to listen on
 const SERVER_PORT = 8080;
 
+app.get('/', async (_, res) => {
+    res.status(200).json({ Message: "Everything is working fine!!" })
+})
+
+
 app.post('/download', async (req, res) => {
 
     const url = req.body.videoUrl;
