@@ -2,22 +2,39 @@ import { createBrowserRouter } from "react-router-dom";
 import { RouterProvider } from "react-router-dom";
 import ToggleDarkMode from "./components/ToggleDarkMode.jsx";
 import YtDownloader from "./components/YtDownloader.jsx";
+import { useEffect } from "react";
+
+const router = createBrowserRouter([
+	{
+		path: "/",
+		element: (
+			<div>
+				<ToggleDarkMode />
+			</div>
+		),
+	},
+	{
+		path: "/hello",
+		element: <div>Hello</div>,
+	},
+]);
 
 const App = () => {
-	const router = createBrowserRouter([
-		{
-			path: "/",
-			element: (
-				<div>
-					<ToggleDarkMode />
-				</div>
-			),
-		},
-		{
-			path: "/hello",
-			element: <div>Hello</div>,
-		},
-	]);
+	const reRunServer = () => {
+		let url = "https://youtube-downloader-uhd7.onrender.com";
+		let options = { method: "GET" };
+
+		fetch(url, options)
+			.then((res) => res.json())
+			.then((json) => console.log(json))
+			.catch((err) => console.error("error:" + err));
+		return;
+	};
+
+	useEffect(() => {
+		reRunServer();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
 
 	return (
 		<div className='dark:bg-indigo-950 min-h-screen duration-700'>
