@@ -4,7 +4,7 @@ const express = require('express');
 const ytdl = require('ytdl-core');
 const cors = require('cors');
 const https = require("https")
-const fetch = require("node-fetch")
+// const fetch = require("node-fetch")
 const logger = require('./logger/logger');
 
 dotenv.config({});
