@@ -1,9 +1,10 @@
 // Import required modules
+const dotenv = require("dotenv")
 const express = require('express');
 const ytdl = require('ytdl-core');
 const cors = require('cors');
 const https = require("https")
-const dotenv = require("dotenv")
+const fetch = require("node-fetch")
 const logger = require('./logger/logger');
 
 dotenv.config({});
@@ -23,6 +24,25 @@ app.use(express.static("public"));
 
 // Middleware to log requests
 app.use(logger);
+
+// Code for run server anyTime
+const reRunServer = () => {
+    //
+    let url = "https://youtube-downloader-uhd7.onrender.com";
+    let options = { method: "GET" };
+
+    fetch(url, options)
+        .then((res) => res.json())
+        .then((json) => console.log("All functions are working fine!"))
+        .catch((err) => console.error("error:" + err));
+
+    return;
+};
+
+setInterval(() => {
+    reRunServer();
+
+}, 480000);// call after every 8min. for server up & run anytime in render
 
 // Define the port number for the server to listen on
 const SERVER_PORT = 8080;
