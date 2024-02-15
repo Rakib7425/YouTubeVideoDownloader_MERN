@@ -12,10 +12,20 @@ const YtDownloader = () => {
 	const [video_info, set_video_info] = useState([]);
 
 	const dispatch = useDispatch();
+	const reRunServer = () => {
+		let url = "https://youtube-downloader-uhd7.onrender.com";
+		let options = { method: "GET" };
 
+		fetch(url, options)
+			.then((res) => res.json())
+			.then((json) => console.log(json))
+			.catch((err) => console.error("error:" + err));
+
+		return;
+	};
 	useEffect(() => {
 		dispatch(setVideoInfo(video_info));
-
+		reRunServer();
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [video_info]);
 
