@@ -6,7 +6,7 @@ const VideoCard = ({ video, thumbnail }) => {
 	const [downloading, setDownloading] = useState(false);
 	const { url, quality, qualityLabel, container } = video;
 
-	console.log(video);
+	// console.log(video);
 
 	const downloadVideo = (event) => {
 		event.preventDefault(); // Prevent default anchor behavior
