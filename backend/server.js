@@ -23,7 +23,7 @@ app.use(express.static("public"));
 
 
 // Middleware to log requests
-app.use(logger);
+// app.use(logger);
 
 // Code for run server anyTime
 const reRunServer = () => {
