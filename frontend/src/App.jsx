@@ -8,7 +8,7 @@ const router = createBrowserRouter([
 	{
 		path: "/",
 		element: (
-			<div>
+			<div className='mb-2'>
 				<ToggleDarkMode />
 			</div>
 		),
