@@ -6,14 +6,14 @@ import VideoCard from "./VideoCard";
 const VideoInfo = () => {
 	const videoInfo = useSelector((store) => store.videoInfo.videoInfo);
 
-	// console.log(videoInfo);
+	console.log(videoInfo);
 
 	return (
 		<div>
 			{videoInfo.formats && (
 				<>
 					<h1 className='dark:text-orange-600 text-3xl py-3 font-semibold'>
-						Video Info ::{" "}
+						:: Video Info ::
 					</h1>
 
 					<div className='flex flex-col justify-center gap-3'>
@@ -23,6 +23,7 @@ const VideoInfo = () => {
 						{videoInfo.formats.map((video, index) => (
 							<div key={index} className='flex items-center justify-center'>
 								<VideoCard
+									videoUrl={videoInfo.videoDetails.video_url}
 									thumbnail={videoInfo.videoDetails.thumbnails[2]}
 									video={video}
 								/>

@@ -26,10 +26,9 @@ app.use(logger);
 
 // Code for run server anyTime
 const reRunServer = () => {
-    let url = "https://youtube-downloader-uhd7.onrender.com";
     let options = { method: "GET" };
 
-    fetch(url, options)
+    fetch(process.env.BASE_URL || process.env.LIVE_BASE_URL, options)
         .then((res) => res.json())
         .then((json) => console.log("All functions are working fine!"))
         .catch((err) => console.error("error:" + err));
@@ -42,13 +41,13 @@ setInterval(() => {
 }, 480000); // call after every 8min. for server up & run anytime in render
 
 // Define the port number for the server to listen on
-const SERVER_PORT = 8080;
+const SERVER_PORT = process.env.PORT || 8080;
 
 app.get('/', async (_, res) => {
     res.status(200).json({ Message: "Everything is working fine!!" })
 })
 
-app.post('/download', async (req, res) => {
+app.post('/search', async (req, res) => {
     const url = req.body.videoUrl;
 
     try {
@@ -62,12 +61,44 @@ app.post('/download', async (req, res) => {
             return res.status(404).json({ message: "Video unavailable or restricted" });
         } else {
             // Handle other errors
-            console.error('Error downloading video:', error);
-            return res.status(500).json({ message: 'Error downloading video', error });
+            console.error('Error Searching video:', error);
+            return res.status(500).json({ message: 'Error Searching video', error });
         }
     }
 });
 
+
+// Route for downloading the selected format
+app.post('/download', async (req, res) => {
+    const { videoUrl, formatId } = req.body;
+    console.log(videoUrl, formatId);
+    try {
+        // Retrieve information about the video from the provided URL
+        const videoInfo = await ytdl.getInfo(videoUrl);
+
+        // Find the format based on the formatId
+        const format = videoInfo.formats.find(format => format.itag == formatId);
+
+        if (!format) {
+            return res.status(404).json({ message: "Format not found" });
+        }
+
+        // Download the video with the selected format
+        const videoReadableStream = ytdl.downloadFromInfo(videoInfo, {
+            format: format
+        });
+
+        // Set response headers
+        res.setHeader('Content-Disposition', `attachment; filename="${videoInfo.title}.${format.container}"`);
+        res.setHeader('Content-Type', format.mimeType);
+
+        // Pipe the video stream to response
+        videoReadableStream.pipe(res);
+    } catch (error) {
+        console.error('Error downloading video:', error);
+        return res.status(500).json({ message: 'Error downloading video', error });
+    }
+});
 
 // Start the server and listen for incoming requests on the specified port
 app.listen(SERVER_PORT, () => {

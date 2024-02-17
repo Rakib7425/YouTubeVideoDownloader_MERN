@@ -3,6 +3,8 @@ import { RouterProvider } from "react-router-dom";
 import ToggleDarkMode from "./components/ToggleDarkMode.jsx";
 import YtDownloader from "./components/YtDownloader.jsx";
 import { useEffect } from "react";
+import { base_url } from "./api_urls.js";
+import VideoDownloader from "./components/VideoDownoader.jsx";
 
 const router = createBrowserRouter([
 	{
@@ -21,10 +23,9 @@ const router = createBrowserRouter([
 
 const App = () => {
 	const reRunServer = () => {
-		let url = "https://youtube-downloader-uhd7.onrender.com";
 		let options = { method: "GET" };
 
-		fetch(url, options)
+		fetch(base_url, options)
 			.then((res) => res.json())
 			.then((json) => console.log(json))
 			.catch((err) => console.error("error:" + err));
@@ -45,6 +46,7 @@ const App = () => {
 				{/* WARN: Don't Change or edit this */}
 				<RouterProvider router={router} />
 				<YtDownloader />
+				{/* <VideoDownloader /> */}
 			</section>
 		</div>
 	);

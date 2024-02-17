@@ -4,7 +4,7 @@ import { LuSearch } from "react-icons/lu";
 import Loader from "./Loader";
 import VideoInfo from "./VideoInfo";
 import { setVideoInfo } from "../store/slices/videoInfoSlice";
-import { download_url } from "../api_urls";
+import { search_url } from "../api_urls";
 
 const YtDownloader = () => {
 	const [url, setUrl] = useState("https://www.youtube.com/watch?v=bwpuspBUUzA");
@@ -19,9 +19,13 @@ const YtDownloader = () => {
 	}, [video_info]);
 
 	const downloadFromYoutube = async () => {
-		if (!url.length) return console.log("Please Enter a valid URL !!");
+		if (url.length < 1) {
+			console.log("Please Enter a valid URL !!");
+			return;
+		}
 
 		setIsLoading(true);
+
 		try {
 			const bodyContent = JSON.stringify({
 				videoUrl: url,
@@ -31,7 +35,7 @@ const YtDownloader = () => {
 				"Content-Type": "application/json",
 			};
 
-			const response = await fetch(`${download_url}`, {
+			const response = await fetch(`${search_url}`, {
 				method: "POST",
 				body: bodyContent,
 				headers: headersList,
@@ -40,6 +44,7 @@ const YtDownloader = () => {
 			const data = await response.json();
 
 			if (!response.status === 200) {
+				console.log(data);
 				throw new Error("Failed to download video");
 			}
 
