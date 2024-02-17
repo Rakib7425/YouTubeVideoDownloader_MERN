@@ -6,7 +6,7 @@ import VideoCard from "./VideoCard";
 const VideoInfo = () => {
 	const videoInfo = useSelector((store) => store.videoInfo.videoInfo);
 
-	console.log(videoInfo);
+	// console.log(videoInfo);
 
 	return (
 		<div>

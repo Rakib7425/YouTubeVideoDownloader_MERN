@@ -16,13 +16,19 @@ const VideoCard = ({ videoUrl, video, thumbnail }) => {
 
 	const downloadVideo = async (event) => {
 		event.preventDefault();
-		setDownloading(true);
+
 		try {
-			const response = await axios.post(download_url, { videoUrl, formatId: itag });
-			const dUrl = window.URL.createObjectURL(new Blob([response.data]));
+			setDownloading(true);
+			const response = await axios.post(
+				download_url,
+				{ videoUrl, formatId: itag },
+				{ responseType: "blob" }
+			);
+			const blob = new Blob([response.data], { type: "video/mp4" });
+			const url = window.URL.createObjectURL(blob);
 			const link = document.createElement("a");
-			link.href = dUrl;
-			link.setAttribute("download", `${qualityLabel}.${container}`);
+			link.href = url;
+			link.setAttribute("download", "video.mp4");
 			document.body.appendChild(link);
 			link.click();
 			document.body.removeChild(link);
@@ -61,7 +67,7 @@ const VideoCard = ({ videoUrl, video, thumbnail }) => {
 			>
 				<span className='flex items-center justify-center gap-2'>
 					{`Download ${video.qualityLabel}`}
-					{!downloading ? <Loader /> : ""}
+					{downloading ? <Loader /> : ""}
 				</span>
 			</a>
 		</div>
