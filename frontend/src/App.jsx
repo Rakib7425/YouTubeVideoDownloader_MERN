@@ -4,7 +4,6 @@ import ToggleDarkMode from "./components/ToggleDarkMode.jsx";
 import YtDownloader from "./components/YtDownloader.jsx";
 import { useEffect } from "react";
 import { base_url } from "./api_urls.js";
-import VideoDownloader from "./components/VideoDownoader.jsx";
 
 const router = createBrowserRouter([
 	{
@@ -46,7 +45,6 @@ const App = () => {
 				{/* WARN: Don't Change or edit this */}
 				<RouterProvider router={router} />
 				<YtDownloader />
-				{/* <VideoDownloader /> */}
 			</section>
 		</div>
 	);

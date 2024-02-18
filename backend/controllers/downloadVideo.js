@@ -3,10 +3,6 @@ const ffmpeg = require('ffmpeg-static');
 const fs = require('fs');
 const { spawn } = require('child_process');
 
-
-// ffmpeg.setFfmpegPath('');
-
-
 const downloadVideo = async (req, res) => {
     const { videoUrl, formatId } = req.body;
 
@@ -36,6 +32,14 @@ const downloadVideo = async (req, res) => {
         await new Promise((resolve, reject) => {
             ytdl(videoUrl, { format: videoFormat })
                 .pipe(fs.createWriteStream(videoFilePath))
+                .on('finish', resolve)
+                .on('error', reject);
+        });
+
+        // Download audio using ytdl-core
+        await new Promise((resolve, reject) => {
+            ytdl(videoUrl)
+                .pipe(fs.createWriteStream(audioFilePath))
                 .on('finish', resolve)
                 .on('error', reject);
         });
