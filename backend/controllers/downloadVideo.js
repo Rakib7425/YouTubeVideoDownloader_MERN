@@ -7,6 +7,9 @@ const downloadVideo = async (req, res) => {
     const { videoUrl, formatId } = req.body;
 
     try {
+        if (videoUrl !== "String") {
+            return new Error("Video url must be a String")
+        }
         // Fetch video info
         const info = await ytdl.getInfo(videoUrl);
 
@@ -26,7 +29,7 @@ const downloadVideo = async (req, res) => {
 
         // Create temporary file paths for video and audio
         const videoFilePath = './temp/downloads/temp_video.mp4';
-        const audioFilePath = './temp/downloads/temp_audio.aac';
+        const audioFilePath = './temp/downloads/temp_audio.mp3';
 
         // Download video using ytdl-core
         await new Promise((resolve, reject) => {
@@ -48,7 +51,7 @@ const downloadVideo = async (req, res) => {
         const ffmpegProcess = spawn(ffmpeg, [
             '-i', videoFilePath,
             '-vn', // Disable video
-            '-acodec', 'aac', // Set audio codec
+            '-acodec', 'mp3', // Set audio codec
             audioFilePath
         ]);
 
