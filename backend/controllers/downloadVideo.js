@@ -94,7 +94,8 @@ const downloadVideo = async (req, res) => {
             } catch (error) {
 
                 res.status(400).json({ Message: "Something went wrong during downloading the video in backend" });
-                console.error(error); fs.unlinkSync(videoFilePath)
+                console.error(error);
+                fs.unlinkSync(videoFilePath)
             }
         });
 

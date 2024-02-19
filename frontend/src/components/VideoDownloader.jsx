@@ -14,6 +14,9 @@ function VideoDownloader() {
 
 	const handleSearch = async () => {
 		try {
+			if (!videoUrl) {
+				return console.log("Enter a valid url");
+			}
 			const response = await axios.post(search_url, { videoUrl });
 			setFormats(response.data.formats);
 			setError("");
@@ -26,6 +29,7 @@ function VideoDownloader() {
 	const handleDownload = async () => {
 		try {
 			const response = await axios.post(download_url, { videoUrl, formatId: selectedFormat });
+			console.log(response);
 			const url = window.URL.createObjectURL(new Blob([response.data]));
 			const link = document.createElement("a");
 			link.href = url;

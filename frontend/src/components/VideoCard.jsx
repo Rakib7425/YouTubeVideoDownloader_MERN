@@ -8,7 +8,7 @@ import { download_url } from "../api_urls";
 import Loader from "./Loader";
 import { LuSearch } from "react-icons/lu";
 
-const VideoCard = ({ videoUrl, video, thumbnail }) => {
+const VideoCard = ({ videoUrl, video, thumbnail, title }) => {
 	const [downloading, setDownloading] = useState(false);
 	const { url, quality, qualityLabel, container, itag } = video;
 
@@ -28,7 +28,7 @@ const VideoCard = ({ videoUrl, video, thumbnail }) => {
 			const url = window.URL.createObjectURL(blob);
 			const link = document.createElement("a");
 			link.href = url;
-			link.setAttribute("download", "video.mp4");
+			link.setAttribute("download", `${title}.mkv`);
 			document.body.appendChild(link);
 			link.click();
 			document.body.removeChild(link);

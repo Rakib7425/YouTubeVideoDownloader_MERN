@@ -7,7 +7,7 @@ import { setVideoInfo } from "../store/slices/videoInfoSlice";
 import { search_url } from "../api_urls";
 
 const YtDownloader = () => {
-	const [url, setUrl] = useState("https://www.youtube.com/watch?v=bwpuspBUUzA");
+	const [url, setUrl] = useState("");
 	const [isLoading, setIsLoading] = useState(false);
 	const [video_info, set_video_info] = useState([]);
 

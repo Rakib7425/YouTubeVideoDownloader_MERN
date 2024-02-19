@@ -25,6 +25,7 @@ const VideoInfo = () => {
 								<VideoCard
 									videoUrl={videoInfo.videoDetails.video_url}
 									thumbnail={videoInfo.videoDetails.thumbnails[2]}
+									title={videoInfo.videoDetails.title}
 									video={video}
 								/>
 							</div>
