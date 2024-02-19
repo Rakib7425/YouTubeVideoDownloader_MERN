@@ -49,42 +49,6 @@ app.get('/', async (_, res) => {
 
 app.post('/search', searchVideo);
 
-
-// Route for downloading the selected format
-// app.post('/download', async (req, res) => {
-//     const { videoUrl, formatId } = req.body;
-
-//     // console.log(videoUrl, formatId);
-
-//     try {
-//         // Retrieve information about the video from the provided URL
-//         const videoInfo = await ytdl.getInfo(videoUrl);
-
-//         // Find the format based on the formatId
-//         const format = videoInfo.formats.find(format => format.itag == formatId);
-
-//         if (!format) {
-//             return res.status(404).json({ message: "Format not found" });
-//         }
-
-//         // Download the video with the selected format
-//         const videoReadableStream = ytdl.downloadFromInfo(videoInfo, {
-//             format: format
-//         });
-
-//         // Set response headers
-//         res.setHeader('Content-Disposition', `attachment; filename="${videoInfo.title}.${format.container}"`);
-//         res.setHeader('Content-Type', format.mimeType);
-
-//         // Pipe the video stream to response
-//         videoReadableStream.pipe(res);
-//     } catch (error) {
-//         console.error('Error downloading video:', error);
-//         return res.status(500).json({ message: 'Error downloading video', error });
-//     }
-// });
-
-
 // Route for downloading the selected format
 app.post('/download', async (req, res) => {
     await downloadVideo(req, res);

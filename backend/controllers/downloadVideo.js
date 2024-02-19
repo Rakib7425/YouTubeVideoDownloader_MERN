@@ -82,12 +82,20 @@ const downloadVideo = async (req, res) => {
             ],
         });
         ffmpegProcess.on('close', () => {
-            console.log('done');
-            // Cleanup
-            process.stdout.write('\n\n\n\n');
-            clearInterval(progressbarHandle);
-            res.status(200).send(fs.readFileSync(videoFilePath))
-            fs.unlinkSync(videoFilePath)
+            try {
+                console.log('done');
+                // Cleanup
+                process.stdout.write('\n\n\n\n');
+                clearInterval(progressbarHandle);
+                res.status(200).send(fs.readFileSync(videoFilePath))
+                fs.unlinkSync(videoFilePath)
+
+                //
+            } catch (error) {
+
+                res.status(400).json({ Message: "Something went wrong during downloading the video in backend" });
+                console.error(error); fs.unlinkSync(videoFilePath)
+            }
         });
 
         // Link streams

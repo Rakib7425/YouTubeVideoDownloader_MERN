@@ -3,7 +3,7 @@ const ytdl = require('ytdl-core');
 
 const searchVideo = async (req, res) => {
     const url = req.body.videoUrl;
-    console.log(typeof url);
+
     try {
         if (!url === "string") {
             return res.status(400).json({ Message: "Invalid video url" })
