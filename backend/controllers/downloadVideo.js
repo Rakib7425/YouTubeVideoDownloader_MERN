@@ -10,9 +10,9 @@ const downloadVideo = async (req, res) => {
 
     try {
 
-        if (!videoUrl === "string") {
-            return res.status(400).json({ Message: "Invalid video url" })
-        }
+        // if (typeof videoUrl !== "string") {
+        //     return res.status(400).json({ Message: "Invalid video url" })
+        // }
 
         const info = await ytdl.getInfo(videoUrl);
         const videoFilePath = `temp/downloads/_${info.videoDetails.title.slice(0, 2)}_.mkv`;

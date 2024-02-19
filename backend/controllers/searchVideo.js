@@ -5,14 +5,18 @@ const searchVideo = async (req, res) => {
     const url = req.body.videoUrl;
 
     try {
-        if (!url === "string") {
-            return res.status(400).json({ Message: "Invalid video url" })
-        }
+        // if (typeof videoUrl !== "string") {
+        //     return res.status(400).json({ Message: "Invalid video url" })
+        // }
 
         // Retrieve information about the video from the provided URL
         const videoInfo = await ytdl.getInfo(url);
+        if (videoInfo) {
+            return res.status(200).send(videoInfo);
+        } else {
+            return res.status(400).json({ Message: "Invalid video url" })
+        }
 
-        return res.status(200).send(videoInfo);
     } catch (error) {
         // Check if the error message indicates that the video is unavailable
         if (error.message.includes("Video unavailable")) {
