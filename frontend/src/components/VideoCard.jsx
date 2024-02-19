@@ -3,10 +3,9 @@
 
 import axios from "axios";
 import { useState } from "react";
-import { IoVolumeMute } from "react-icons/io5";
+import { IoVolumeHigh } from "react-icons/io5";
 import { download_url } from "../api_urls";
 import Loader from "./Loader";
-import { LuSearch } from "react-icons/lu";
 
 const VideoCard = ({ videoUrl, video, thumbnail, title }) => {
 	const [downloading, setDownloading] = useState(false);
@@ -41,35 +40,36 @@ const VideoCard = ({ videoUrl, video, thumbnail, title }) => {
 	};
 
 	return (
-		<div className='flex items-center justify-between w-3/4'>
+		<div className='flex items-center justify-between w-full px-2 md:px-0.5 md:w-3/4'>
 			<div>
 				<img src={`${thumbnail.url}`} alt='Thumbnail' className='h-20 w-32' />
 			</div>
-			<p className='text-xl dark:text-orange-400 text-gray-700 flex items-center justify-center gap-2'>
+			<p className='text-xl dark:text-green-400 text-gray-800 flex items-center md:justify-center justify-between gap-x-0.5 md:gap-2'>
 				Quality:{" "}
 				{`${quality.charAt(0).toUpperCase()}${quality.slice(1)} ${video.qualityLabel}, `}
 				Audio:{" "}
 				{video.audioBitrate === null || video.audioBitrate === undefined ? (
-					<span className='mt-1 text-red-500'>
-						<IoVolumeMute />
+					<span className='mt-1 text-green-500'>
+						<IoVolumeHigh />
 					</span>
 				) : (
-					`${video.audioBitrate} bit`
+					// `${video.audioBitrate} bit`
+					<span className='text-red-600'>{"Not available"}</span>
 				)}
 			</p>
 
-			<a
+			<button
 				target='_blank'
 				type='button'
 				onClick={(e) => downloadVideo(e)}
 				disabled={downloading}
-				className='py-2 px-2 my-2 w-32 cursor-pointer bg-blue-700 hover:bg-blue-800 hover:text-gray-300 text-white duration-200 rounded-md'
+				className='py-2 px-2 my-2 w-32 text-sm md:text-base cursor-pointer bg-blue-700 hover:bg-blue-800 hover:text-gray-300 text-white duration-200 rounded-md'
 			>
 				<span className='flex items-center justify-center gap-2'>
-					{`Download ${video.qualityLabel}`}
+					{`Download ${video.qualityLabel === null ? "mp3" : `${video.qualityLabel}`}`}
 					{downloading ? <Loader /> : ""}
 				</span>
-			</a>
+			</button>
 		</div>
 	);
 };

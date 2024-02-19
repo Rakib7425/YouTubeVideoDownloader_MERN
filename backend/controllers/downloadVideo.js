@@ -88,14 +88,19 @@ const downloadVideo = async (req, res) => {
                 process.stdout.write('\n\n\n\n');
                 clearInterval(progressbarHandle);
                 res.status(200).send(fs.readFileSync(videoFilePath))
-                fs.unlinkSync(videoFilePath)
+                if (videoFilePath) {
+                    fs.unlinkSync(videoFilePath)
+                }
                 console.log('done');
                 //
             } catch (error) {
 
                 res.status(400).json({ Message: "Something went wrong during downloading the video in backend" });
                 console.error(error);
-                fs.unlinkSync(videoFilePath)
+
+                if (videoFilePath) {
+                    fs.unlinkSync(videoFilePath)
+                }
             }
         });
 
