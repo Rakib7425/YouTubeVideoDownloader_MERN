@@ -257,3 +257,8 @@ URL: localhost/download | Body: {"videoUrl":"https://www.youtube.com/watch?v=8k0
 URL: localhost/download | Body: {"videoUrl":"https://www.youtube.com/watch?v=8k07lknJMos","formatId":160} | Time: 20/2/2024, 12:11:46 am
 URL: localhost/download | Body: {"videoUrl":"https://www.youtube.com/watch?v=8k07lknJMos","formatId":160} | Time: 20/2/2024, 12:12:29 am
 URL: localhost/download | Body: {"videoUrl":"https://www.youtube.com/watch?v=8k07lknJMos","formatId":242} | Time: 20/2/2024, 12:13:50 am
+URL: localhost/search | Body: {"videoUrl":"https://www.youtube.com/watch?v=8k07lknJMos"} | Time: 20/2/2024, 12:18:45 am
+URL: localhost/search | Body: {"videoUrl":"https://www.youtube.com/watch?v=8k07lknJMos"} | Time: 20/2/2024, 12:19:21 am
+URL: localhost/search | Body: {"videoUrl":"https://www.youtube.com/watch?v=8k07lknJMos"} | Time: 20/2/2024, 12:19:34 am
+URL: localhost/download | Body: {"videoUrl":"https://www.youtube.com/watch?v=8k07lknJMos","formatId":160} | Time: 20/2/2024, 12:20:28 am
+URL: localhost/download | Body: {} | Time: 20/2/2024, 12:22:04 am

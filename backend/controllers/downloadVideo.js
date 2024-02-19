@@ -1,7 +1,6 @@
 const ytdl = require('ytdl-core');
 const ffmpeg = require('ffmpeg-static');
 const fs = require('fs');
-const { spawn } = require('child_process');
 const cp = require('child_process');
 const readline = require('readline');
 // External modules 
@@ -10,11 +9,15 @@ const downloadVideo = async (req, res) => {
     const { videoUrl, formatId } = req.body;
 
     try {
+
+        if (!videoUrl === "string") {
+            return res.status(400).json({ Message: "Invalid video url" })
+        }
+
         const info = await ytdl.getInfo(videoUrl);
         const videoFilePath = `temp/downloads/_${info.videoDetails.title.slice(0, 2)}_.mkv`;
 
-        // Global constants
-        const ref = videoUrl;
+        // Global constants  
         const tracker = {
             start: Date.now(),
             audio: { downloaded: 0, total: Infinity },
@@ -23,11 +26,11 @@ const downloadVideo = async (req, res) => {
         };
 
         // Get audio and video streams
-        const audio = ytdl(ref, { quality: 'highestaudio' })
+        const audio = ytdl(videoUrl, { quality: 'highestaudio' })
             .on('progress', (_, downloaded, total) => {
                 tracker.audio = { downloaded, total };
             });
-        const video = ytdl(ref, { quality: formatId })
+        const video = ytdl(videoUrl, { quality: formatId })
             .on('progress', (_, downloaded, total) => {
                 tracker.video = { downloaded, total };
             });
