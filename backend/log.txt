@@ -48,3 +48,8 @@ URL: localhost/search | Body: {"videoUrl":"https://www.youtube.com/watch?v=8k07l
 URL: localhost/download | Body: {"videoUrl":"https://www.youtube.com/watch?v=8k07lknJMos","formatId":160} | Time: 20/2/2024, 1:27:03 am
 URL: localhost/download | Body: {"videoUrl":"https://www.youtube.com/watch?v=8k07lknJMos","formatId":160} | Time: 20/2/2024, 1:28:25 am
 URL: localhost/download | Body: {"videoUrl":"https://www.youtube.com/watch?v=8k07lknJMos","formatId":160} | Time: 20/2/2024, 1:29:32 am
+URL: localhost/ | Body: {} | Time: 20/2/2024, 1:33:22 am
+URL: localhost/search | Body: {"videoUrl":"https://www.youtube.com/watch?v=8k07lknJMos"} | Time: 20/2/2024, 1:33:35 am
+URL: localhost/download | Body: {"videoUrl":"https://www.youtube.com/watch?v=8k07lknJMos","formatId":160} | Time: 20/2/2024, 1:33:46 am
+URL: localhost/ | Body: {} | Time: 20/2/2024, 1:36:48 am
+URL: localhost/search | Body: {"videoUrl":"https://www.youtube.com/watch?v=bwpuspBUUzA"} | Time: 20/2/2024, 1:36:49 am
