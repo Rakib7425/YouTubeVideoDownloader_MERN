@@ -83,13 +83,13 @@ const downloadVideo = async (req, res) => {
         });
         ffmpegProcess.on('close', () => {
             try {
-                console.log('done');
+
                 // Cleanup
                 process.stdout.write('\n\n\n\n');
                 clearInterval(progressbarHandle);
                 res.status(200).send(fs.readFileSync(videoFilePath))
                 fs.unlinkSync(videoFilePath)
-
+                console.log('done');
                 //
             } catch (error) {
 
@@ -112,6 +112,7 @@ const downloadVideo = async (req, res) => {
             }
             tracker.merged = args;
         });
+
         audio.pipe(ffmpegProcess.stdio[4]);
         video.pipe(ffmpegProcess.stdio[5]);
 
