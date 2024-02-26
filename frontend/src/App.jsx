@@ -32,7 +32,7 @@ const App = () => {
 	};
 
 	useEffect(() => {
-		reRunServer();
+		// reRunServer();
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
